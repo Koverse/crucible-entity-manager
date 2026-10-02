@@ -1,0 +1,67 @@
+# Execution definitions for the entity pipeline, in the format of the
+# `definitions:` map in crucible-prototype's execution-api-configmap.yaml.
+# See README.md in this directory for how to install them and start partitions.
+#
+# Replace LIVE_POV with the perspective, and pin `commit` for production.
+# `profile` follows the configmap's current name; update it when the profile is
+# renamed (for example to crucible-python).
+
+entity-transformer:
+  display-name: Entity Transformer
+  description: Origin records to report events
+  namespace: crucible
+  profile: crucible-analytics
+  enabled: true
+  source:
+    type: GIT
+    repo-url: https://github.com/Koverse/crucible-entity-manager.git
+    branch: develop
+    secret-name: crucible-git-token
+    entrypoint: src/run_entity_manager.py
+  template:
+    args: [transformer, LIVE_POV, --partition, "0", --partitions, "1"]
+
+entity-tracker:
+  display-name: Entity Tracker
+  description: Report events to component tracks (Kalman, covariance intersection or passthrough)
+  namespace: crucible
+  profile: crucible-analytics
+  enabled: true
+  source:
+    type: GIT
+    repo-url: https://github.com/Koverse/crucible-entity-manager.git
+    branch: develop
+    secret-name: crucible-git-token
+    entrypoint: src/run_entity_manager.py
+  template:
+    args: [tracker, LIVE_POV, --partition, "0", --partitions, "1"]
+
+entity-fuser:
+  display-name: Entity Track Fuser
+  description: Component tracks to principal tracks; one per perspective
+  namespace: crucible
+  profile: crucible-analytics
+  enabled: true
+  source:
+    type: GIT
+    repo-url: https://github.com/Koverse/crucible-entity-manager.git
+    branch: develop
+    secret-name: crucible-git-token
+    entrypoint: src/run_entity_manager.py
+  template:
+    args: [fuser, LIVE_POV]
+
+entity-duplicates:
+  display-name: Entity Duplicate Identifier
+  description: SUPERSEDE events for duplicate component tracks; one per perspective
+  namespace: crucible
+  profile: crucible-analytics
+  enabled: true
+  source:
+    type: GIT
+    repo-url: https://github.com/Koverse/crucible-entity-manager.git
+    branch: develop
+    secret-name: crucible-git-token
+    entrypoint: src/run_entity_manager.py
+  template:
+    args: [duplicates, LIVE_POV]

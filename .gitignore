@@ -14,3 +14,10 @@ htmlcov/
 .DS_Store
 .idea/
 .vscode/
+
+# Local pyenv selection (developer-specific)
+.python-version
+wheels/
+
+# misc
+ToDo.md

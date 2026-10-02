@@ -1,0 +1,57 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [develop, main]
+  push:
+    branches: [develop, main]
+
+permissions:
+  contents: read
+
+env:
+  CRUCIBLELIB_RELEASE: v3.0.10
+  CRUCIBLELIB_ASSET: cruciblelib-1.8.4.tar.gz
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - uses: astral-sh/setup-uv@v6
+        with:
+          version: "0.11.21"
+
+      # cruciblelib is published as a release asset of the private crucible-analytics
+      # repository. The tarball contains the wheel.
+      - name: Fetch cruciblelib wheel
+        env:
+          GH_TOKEN: ${{ secrets.CRUCIBLE_ANALYTICS_TOKEN }}
+        run: |
+          mkdir -p wheels
+          gh release download "$CRUCIBLELIB_RELEASE" -R Koverse/crucible-analytics \
+            -p "$CRUCIBLELIB_ASSET" -D wheels
+          tar -xzf "wheels/$CRUCIBLELIB_ASSET" -C wheels
+
+      - name: Install locked dependencies
+        run: |
+          uv venv
+          uv pip sync requirements/dev.lock --find-links wheels
+          uv pip install --no-deps -e .
+
+      - name: Lint
+        run: uv run --no-sync ruff check --output-format=github .
+
+      - name: Format
+        run: uv run --no-sync ruff format --check .
+
+      - name: Type check
+        run: uv run --no-sync ty check --output-format=github
+
+      - name: Test
+        run: uv run --no-sync pytest --cov --cov-report=term-missing

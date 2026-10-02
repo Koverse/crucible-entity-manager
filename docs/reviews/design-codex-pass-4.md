@@ -1,0 +1,26 @@
+## Findings
+
+1. **Critical — §5.3/D11: the existence check does not make creation safe.** Another writer can create or stamp a head after the query reports it missing and before the ENTITY upsert. That upsert can still overwrite `associatedPrincipalTrack`, the loss D11 claims to fix. Evidence: [DESIGN.md:266](docs/DESIGN.md:266), [DESIGN.md:277](docs/DESIGN.md:277), [entity_track_fuser.py:145](src/objectApps/correlators/entity_manager/entity_track_fuser.py:145). **Recommendation:** use an atomic create-if-absent operation or coordinate these writers; otherwise document this remaining race under D10 and remove the claim that D11 fixes it.
+
+2. **Major — §5.3/D11: existence-query failures have no safe path.** The design specifies one `IN` query but no error handling or bound on IDs or query size. Treating a failed or incomplete read as “no IDs exist” would trigger unsafe upserts. Cruciblelib’s search can raise on HTTP failure. Evidence: [DESIGN.md:272](docs/DESIGN.md:272), [read_controller.py:330](site-packages/cruciblelib/controllers/v2/read_controller.py:330). **Recommendation:** fail closed, withhold affected events, retry the read, chunk and escape IDs, and verify query limits against Crucible.
+
+3. **Major — §§5.3, 5.5/D4: the fingerprint does not identify every input change that matters.** It covers kinematics, while identity changes affect fused output and environment can affect tracker noise. Also, two tracker pods can produce different kinematics and covariance from the same report because their priors differ; the fuser then accepts both fingerprints. Exact float equality after serialization is unspecified. Evidence: [DESIGN.md:360](docs/DESIGN.md:360), [DESIGN.md:365](docs/DESIGN.md:365), [entity_tracker.py:1038](src/objectApps/correlators/entity_manager/entity_tracker.py:1038), [entity_track_fuser.py:289](src/objectApps/correlators/entity_manager/entity_track_fuser.py:289). **Recommendation:** define exact fields, missing-value and numeric canonicalization rules; test serialization and compaction. State explicitly that differing outputs from overlapping pods can both be fused.
+
+4. **Major — §5.3/D2: head identity permits only partial rehydration.** The baseline overlays fused `identity.*` onto principal heads, so values can be read back, but head updates are best effort and precedence ranks are never stored. After eviction, a survivor value can overwrite a previously higher-ranked superseded value. Evidence: [DESIGN.md:260](docs/DESIGN.md:260), [entity_track_fuser.py:289](src/objectApps/correlators/entity_manager/entity_track_fuser.py:289), [entity_track_fuser.py:939](src/objectApps/correlators/entity_manager/entity_track_fuser.py:939), [DESIGN.md:76](docs/DESIGN.md:76). **Recommendation:** persist ranks and specify the read-on-miss path, or record the resulting precedence and stale-head losses as D2 behavior.
+
+5. **Minor — §§5.5, 5.7: two guarantees are overstated.** Heads need not “converge” after an old pod’s final write if no later input updates them. `os._exit` enforces the process deadline but bypasses TaskGroup cleanup and logging shutdown; an in-flight request may have committed, and buffered diagnostic output may be lost. Evidence: [DESIGN.md:383](docs/DESIGN.md:383), [DESIGN.md:429](docs/DESIGN.md:429), [DESIGN.md:453](docs/DESIGN.md:453). **Recommendation:** qualify convergence and write outcome as uncertain; specify a bounded, flushed final diagnostic path and test it in a subprocess.
+
+6. **Minor — §§5.3, 10: retry and summary bounds disagree.** Failed association stamps remain pending and retry every cycle without a stated cap, expiry or terminal rule. D2’s decision row also still says the identity accumulator expires after 30 minutes, while §5.3 says it has no idle expiry. Evidence: [DESIGN.md:354](docs/DESIGN.md:354), [DESIGN.md:257](docs/DESIGN.md:257), [DESIGN.md:823](docs/DESIGN.md:823). **Recommendation:** define the pending-stamp cap and its loss behavior; align D2’s summary.
+
+## Pass-3 finding status
+
+| # | Status | Reason |
+|---|---|---|
+| 1 | **Partially resolved** | Existence reads distinguish the stated PUT failure types, but create still races and read failures are unspecified. |
+| 2 | **Resolved** | `os._exit` can enforce the process deadline; final diagnostics and write outcomes remain uncertain. |
+| 3 | **Resolved** | Sparse association stamps no longer enter the create fallback; retry bounds need specification. |
+| 4 | **Partially resolved** | Head values support rehydration, but ranks and sometimes recent values are unavailable. |
+| 5 | **Partially resolved** | Kinematic rewrites are distinguished, but other meaningful changes and differing pod outputs are not. |
+| 6 | **Resolved** | The three summary errors identified in pass 3 were corrected; the D2 row has a new inconsistency. |
+
+**The design is not yet sound enough as an implementation contract.** The D11 overwrite race and the identity and deduplication semantics need explicit resolution first. I made no file changes.
