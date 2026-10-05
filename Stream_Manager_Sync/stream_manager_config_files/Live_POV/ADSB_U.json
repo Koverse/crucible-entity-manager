@@ -1,0 +1,153 @@
+{
+    "correlation_type": "dynamic",
+    "crucible_tracker": "kalman",
+    "custom_functions": [
+        {
+            "function_name": "get_velocity"
+        },
+        {
+            "function_name": "set_edh"
+        },
+        {
+            "function_name": "set_description"
+        }
+    ],
+    "destination_unique_ID_column": "identity.callsign",
+    "disabled": false,
+    "num_tracker_workers": 2,
+    "num_transformer_workers": 2,
+    "origin_dataset": "ADSB_U",
+    "origin_to_destination_mapping": [
+        {
+            "destination_column": "estimatedKinematics.kinematicsTimestamp",
+            "origin_column": "nifi_timestamp"
+        },
+        {
+            "destination_column": "estimatedKinematics.position.altitude",
+            "origin_column": "alt_geom"
+        },
+        {
+            "destination_column": "estimatedKinematics.position.latitude",
+            "origin_column": "noised_lat"
+        },
+        {
+            "destination_column": "estimatedKinematics.position.longitude",
+            "origin_column": "noised_lon"
+        },
+        {
+            "destination_column": "edhControlSet",
+            "origin_column": "defaultEDH"
+        },
+        {
+            "destination_column": "mode",
+            "literal": "LIVE"
+        },
+        {
+            "destination_column": "identity.environment.environment",
+            "literal": "AIR"
+        },
+        {
+            "destination_column": "identity.standard.standardIdentity",
+            "literal": "ASSUMED_FRIEND"
+        },
+        {
+            "destination_column": "estimatedKinematics.velocity.northSpeed",
+            "origin_column": "northSpeed"
+        },
+        {
+            "destination_column": "estimatedKinematics.velocity.eastSpeed",
+            "origin_column": "eastSpeed"
+        },
+        {
+            "destination_column": "estimatedKinematics.uncertainty.uncertaintyEllipse.orientation",
+            "origin_column": "uncertainty_orientation"
+        },
+        {
+            "destination_column": "estimatedKinematics.uncertainty.uncertaintyEllipse.semiMajorAxisLength",
+            "origin_column": "uncertainty_semimajor"
+        },
+        {
+            "destination_column": "estimatedKinematics.uncertainty.uncertaintyEllipse.semiMinorAxisLength",
+            "origin_column": "uncertainty_semiminor"
+        },
+        {
+            "destination_column": "entityStatus",
+            "literal": "CONFIRMED"
+        },
+        {
+            "destination_column": "upstreamSource",
+            "literal": "Tilly_Radar_Station"
+        },
+        {
+            "destination_column": "collectionType",
+            "literal": "ADSB_receiver"
+        },
+        {
+            "destination_column": "enterpriseObjectId",
+            "origin_column": "enterpriseObjectId"
+        },
+        {
+            "destination_column": "atomsId",
+            "origin_column": "atomsId"
+        },
+        {
+            "destination_column": "atomsName",
+            "origin_column": "atomsName"
+        },
+        {
+            "destination_column": "unit",
+            "origin_column": "unit"
+        },
+        {
+            "destination_column": "unitEchelon",
+            "origin_column": "unitEchelon"
+        },
+        {
+            "destination_column": "kinematicallyInferredOrigin",
+            "origin_column": "kinematicallyInferredOrigin"
+        },
+        {
+            "destination_column": "kinematicallyInferredDestination",
+            "origin_column": "kinematicallyInferredDestination"
+        },
+        {
+            "destination_column": "kinematicallyInferredPlatformType",
+            "origin_column": "kinematicallyInferredPlatformType"
+        },
+        {
+            "destination_column": "identity.siteType",
+            "origin_column": "siteType"
+        },
+        {
+            "destination_column": "identity.description",
+            "origin_column": "set_description"
+        }
+    ],
+    "origin_unique_ID_column": "hex",
+    "perspective": "Live_POV",
+    "query": "SELECT * FROM ADSB_U where lat is not null and lon is not null",
+    "skip_ECEF_conversion": false,
+    "skip_object_manager": false,
+    "unit_conversions": [
+        {
+            "origin_column": "noised_lat",
+            "unit_conversion": "degrees_to_radians"
+        },
+        {
+            "origin_column": "noised_lon",
+            "unit_conversion": "degrees_to_radians"
+        },
+        {
+            "origin_column": "alt_geom",
+            "unit_conversion": "ft_to_m"
+        },
+        {
+            "origin_column": "alt_geom",
+            "unit_conversion": "alt_ge_0"
+        },
+        {
+            "origin_column": "gs",
+            "unit_conversion": "knots_to_mps"
+        }
+    ]
+}

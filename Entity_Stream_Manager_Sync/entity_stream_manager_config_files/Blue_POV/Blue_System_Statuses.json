@@ -1,0 +1,44 @@
+{
+    "correlation_type": "named object",
+    "custom_functions": [
+        {
+            "function_name": "failed_destroyed"
+        }
+    ],
+    "custom_functions_script_name": "custom_functions",
+    "destination_unique_ID_column": "identity.callsign",
+    "origin_dataset": "Blue_System_Statuses",
+    "origin_to_destination_mapping": [
+        {
+            "destination_column": "mode",
+            "literal": "SIMULATION"
+        },
+        {
+            "destination_column": "identity.environment",
+            "literal": "UNKNOWN"
+        },
+        {
+            "destination_column": "identity.standard",
+            "literal": "FRIEND"
+        }
+    ],
+    "origin_unique_ID_column": "SystemStatus.MessageData.SystemID.DescriptiveLabel",
+    "perspective": "Blue_POV",
+    "query": "SELECT * FROM Blue_System_Statuses",
+    "unit_conversions_script_name": "unit_conversions",
+    "custom_function_api_version": 2,
+    "number_of_transformer_processes": 1,
+    "batch_update_chunk_size": "1000",
+    "batch_write_chunk_size": "5000",
+    "batch_write_max_concurrent": 1,
+    "component_track_event_dataset": "Blue_POV_ComponentTrackEvents",
+    "component_track_head_dataset": "Blue_POV_ComponentTrackHeads",
+    "entity_management_event_dataset": "Blue_POV_EntityManagementEvents",
+    "head_update_interval_seconds": 30,
+    "principal_track_event_dataset": "Blue_POV_PrincipalTrackEvents",
+    "principal_track_head_dataset": "Blue_POV_PrincipalTrackHeads",
+    "report_event_dataset": "Blue_POV_ReportEvents",
+    "skip_head_preload": true,
+    "use_numpy_fusion": true,
+    "use_numpy_kalman": true
+}

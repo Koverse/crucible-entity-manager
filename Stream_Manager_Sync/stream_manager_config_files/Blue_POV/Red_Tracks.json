@@ -1,0 +1,75 @@
+{
+    "correlation_type": "named object",
+    "custom_functions": [
+        {
+            "function_name": "placeholder_function"
+        }
+    ],
+    "custom_functions_script_name": "custom_functions",
+    "destination_unique_ID_column": "identity.callsign",
+    "object_dataset": "Blue_POV_Objects",
+    "object_event_dataset": "Blue_POV_Object_Events",
+    "origin_dataset": "Red_Tracks",
+    "origin_to_destination_mapping": [
+        {
+            "destination_column": "estimatedKinematics.kinematicsTimestamp",
+            "origin_column": "Entity.MessageData.EstimatedKinematics.KinematicsTimeStamp"
+        },
+        {
+            "destination_column": "estimatedKinematics.position.altitude",
+            "origin_column": "Entity.MessageData.EstimatedKinematics.Position.FixedPositionType.FixedPoint.Altitude"
+        },
+        {
+            "destination_column": "estimatedKinematics.position.latitude",
+            "origin_column": "Entity.MessageData.EstimatedKinematics.Position.FixedPositionType.FixedPoint.Latitude"
+        },
+        {
+            "destination_column": "estimatedKinematics.position.longitude",
+            "origin_column": "Entity.MessageData.EstimatedKinematics.Position.FixedPositionType.FixedPoint.Longitude"
+        },
+        {
+            "destination_column": "estimatedKinematics.velocity.northSpeed",
+            "origin_column": "Entity.MessageData.EstimatedKinematics.Velocity.NorthSpeed"
+        },
+        {
+            "destination_column": "estimatedKinematics.velocity.eastSpeed",
+            "origin_column": "Entity.MessageData.EstimatedKinematics.Velocity.EastSpeed"
+        },
+        {
+            "destination_column": "estimatedKinematics.velocity.downSpeed",
+            "origin_column": "Entity.MessageData.EstimatedKinematics.Velocity.DownSpeed"
+        },
+        {
+            "destination_column": "estimatedKinematics.uncertainty.uncertaintyEllipse.orientation",
+            "origin_column": "Entity.MessageData.EstimatedKinematics.Position.FixedPositionType.Uncertainty.UncertaintyEllipse.Orientation"
+        },
+        {
+            "destination_column": "estimatedKinematics.uncertainty.uncertaintyEllipse.semiMinorAxisLength",
+            "origin_column": "Entity.MessageData.EstimatedKinematics.Position.FixedPositionType.Uncertainty.UncertaintyEllipse.SemiMinorAxisLength"
+        },
+        {
+            "destination_column": "estimatedKinematics.uncertainty.uncertaintyEllipse.semiMajorAxisLength",
+            "origin_column": "Entity.MessageData.EstimatedKinematics.Position.FixedPositionType.Uncertainty.UncertaintyEllipse.SemiMajorAxisLength"
+        },
+        {
+            "destination_column": "entityStatus",
+            "origin_column": "Entity.MessageData.EntityStatus"
+        },
+        {
+            "destination_column": "mode",
+            "literal": "SIMULATION"
+        },
+        {
+            "destination_column": "identity.environment.environment",
+            "literal": "UNKNOWN"
+        },
+        {
+            "destination_column": "identity.standard.standardIdentity",
+            "literal": "FRIEND"
+        }
+    ],
+    "origin_unique_ID_column": "Entity.MessageData.EntityID.DescriptiveLabel",
+    "perspective": "Blue_POV",
+    "query": "SELECT * FROM Red_Tracks",
+    "unit_conversions_script_name": "unit_conversions"
+}

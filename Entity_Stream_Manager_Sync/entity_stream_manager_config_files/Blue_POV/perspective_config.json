@@ -1,0 +1,21 @@
+{
+    "component_track_event_dataset": "Blue_POV_ComponentTrackEvents",
+    "component_track_head_dataset": "Blue_POV_ComponentTrackHeads",
+    "custom_functions_script_name": "custom_functions",
+    "entity_dataset": "Blue_POV_Entities",
+    "entity_management_event_dataset": "Blue_POV_EntityManagementEvents",
+    "origin_dataset": "perspective_config_Blue_POV",
+    "perspective": "Blue_POV",
+    "principal_track_event_dataset": "Blue_POV_PrincipalTrackEvents",
+    "principal_track_head_dataset": "Blue_POV_PrincipalTrackHeads",
+    "report_event_dataset": "Blue_POV_ReportEvents",
+    "unit_conversions_script_name": "unit_conversions",
+    "use_numpy_kalman": true,
+    "skip_head_preload": true,
+    "num_fusion_workers": 12,
+    "use_numpy_fusion": true,
+    "head_update_interval_seconds": 30,
+    "batch_update_chunk_size": "1000",
+    "batch_write_max_concurrent": 1,
+    "batch_write_chunk_size": "5000"
+}

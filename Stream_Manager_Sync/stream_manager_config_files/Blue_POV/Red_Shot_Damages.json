@@ -1,0 +1,34 @@
+{
+    "correlation_type": "named object",
+    "custom_functions": [
+        {
+            "function_name": "placeholder_function"
+        }
+    ],
+    "custom_functions_script_name": "custom_functions",
+    "destination_unique_ID_column": "endurance",
+    "disabled": true,
+    "object_dataset": "Blue_POV_Objects",
+    "object_event_dataset": "Blue_POV_Object_Events",
+    "origin_dataset": "Red_Shot_Damages",
+    "origin_to_destination_mapping": [
+        {
+            "destination_column": "mode",
+            "literal": "SIMULATION"
+        },
+        {
+            "destination_column": "identity.environment.environment",
+            "literal": "UNKNOWN"
+        },
+        {
+            "destination_column": "identity.standard.standardIdentity",
+            "literal": "FRIEND"
+        }
+    ],
+    "origin_unique_ID_column": "ShotDamage.Shooter_UUID",
+    "perspective": "Blue_POV",
+    "query": "SELECT * FROM some_query",
+    "source_column": "endurance",
+    "unit_conversions": [],
+    "unit_conversions_script_name": "unit_conversions"
+}

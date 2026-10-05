@@ -1,0 +1,147 @@
+{
+    "correlation_type": "Dynamic object creation",
+    "crucible_tracker": "kalman",
+    "custom_functions": [
+        {
+            "function_name": "set_edh"
+        },
+        {
+            "function_name": "set_description"
+        }
+    ],
+    "destination_unique_ID_column": "identity.mmsiNumber",
+    "disabled": false,
+    "num_tracker_workers": 1,
+    "number_of_transformer_processes": 1,
+    "object_enrichment_class": "enrich_AIS_with_reference_data",
+    "origin_dataset": "AIS_U",
+    "origin_to_destination_mapping": [
+        {
+            "destination_column": "estimatedKinematics.position.latitude",
+            "origin_column": "noised_lat"
+        },
+        {
+            "destination_column": "estimatedKinematics.position.longitude",
+            "origin_column": "noised_lon"
+        },
+        {
+            "destination_column": "estimatedKinematics.kinematicsTimestamp",
+            "origin_column": "BaseDateTime"
+        },
+        {
+            "destination_column": "estimatedKinematics.uncertainty.uncertaintyEllipse.orientation",
+            "origin_column": "uncertainty_orientation"
+        },
+        {
+            "destination_column": "estimatedKinematics.uncertainty.uncertaintyEllipse.semiMajorAxisLength",
+            "origin_column": "uncertainty_semimajor"
+        },
+        {
+            "destination_column": "estimatedKinematics.uncertainty.uncertaintyEllipse.semiMinorAxisLength",
+            "origin_column": "uncertainty_semiminor"
+        },
+        {
+            "destination_column": "mode",
+            "literal": "LIVE"
+        },
+        {
+            "destination_column": "identity.environment.environment",
+            "literal": "SEA_SURFACE"
+        },
+        {
+            "destination_column": "identity.standard.standardIdentity",
+            "literal": "ASSUMED_FRIEND"
+        },
+        {
+            "destination_column": "identity.standard.allegiance",
+            "literal": "USA"
+        },
+        {
+            "destination_column": "edhControlSet",
+            "origin_column": "defaultEDH"
+        },
+        {
+            "destination_column": "entityStatus",
+            "literal": "POTENTIAL"
+        },
+        {
+            "destination_column": "upstreamSource",
+            "literal": "AIS_aggregator"
+        },
+        {
+            "destination_column": "collectionType",
+            "literal": "AIS_beacon"
+        },
+        {
+            "destination_column": "enterpriseObjectId",
+            "origin_column": "enterpriseObjectId"
+        },
+        {
+            "destination_column": "atomsId",
+            "origin_column": "atomsId"
+        },
+        {
+            "destination_column": "atomsName",
+            "origin_column": "atomsName"
+        },
+        {
+            "destination_column": "unit",
+            "origin_column": "unit"
+        },
+        {
+            "destination_column": "unitEchelon",
+            "origin_column": "unitEchelon"
+        },
+        {
+            "destination_column": "kinematicallyInferredOrigin",
+            "origin_column": "kinematicallyInferredOrigin"
+        },
+        {
+            "destination_column": "kinematicallyInferredDestination",
+            "origin_column": "kinematicallyInferredDestination"
+        },
+        {
+            "destination_column": "kinematicallyInferredPlatformType",
+            "origin_column": "kinematicallyInferredPlatformType"
+        },
+        {
+            "destination_column": "identity.siteType",
+            "origin_column": "siteType"
+        },
+        {
+            "destination_column": "identity.vesselName",
+            "origin_column": "VesselName"
+        },
+        {
+            "destination_column": "identity.vesselTypeCode",
+            "origin_column": "Type_x"
+        },
+        {
+            "destination_column": "identity.navalPennant",
+            "origin_column": "Pennant Number_x"
+        },
+        {
+            "destination_column": "identity.description",
+            "origin_column": "set_description"
+        }
+    ],
+    "origin_unique_ID_column": "MMSI",
+    "perspective": "Live_POV",
+    "query": "SELECT * FROM AIS_U",
+    "skip_ECEF_conversion": false,
+    "skip_object_manager": false,
+    "unit_conversions": [
+        {
+            "origin_column": "noised_lat",
+            "unit_conversion": "degrees_to_radians"
+        },
+        {
+            "origin_column": "noised_lon",
+            "unit_conversion": "degrees_to_radians"
+        },
+        {
+            "origin_column": "MMSI",
+            "unit_conversion": "convert_to_string"
+        }
+    ]
+}

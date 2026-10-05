@@ -1,0 +1,104 @@
+{
+    "correlation_type": "dynamic",
+    "crucible_tracker": "kalman",
+    "custom_functions": [
+        {
+            "function_name": "velocity_components_to_speed_heading"
+        },
+        {
+            "function_name": "set_edh"
+        }
+    ],
+    "destination_unique_ID_column": "identity.dynamicIdentifier",
+    "disabled": true,
+    "num_tracker_workers": 2,
+    "origin_dataset": "APL_taxonomy_tracks",
+    "origin_to_destination_mapping": [
+        {
+            "destination_column": "geodetic.latitude",
+            "origin_column": "estimatedKinematics.position.latitude"
+        },
+        {
+            "destination_column": "geodetic.longitude",
+            "origin_column": "estimatedKinematics.position.longitude"
+        },
+        {
+            "destination_column": "geodetic.altitude",
+            "origin_column": "estimatedKinematics.position.altitude"
+        },
+        {
+            "destination_column": "estimatedKinematics.kinematicsTimestamp",
+            "origin_column": "replayTimestamp"
+        },
+        {
+            "destination_column": "uncertainty.uncertaintyEllipse.orientation",
+            "origin_column": "estimatedKinematics.uncertainty.uncertaintyEllipse.orientation"
+        },
+        {
+            "destination_column": "uncertainty.uncertaintyEllipse.semiMajorAxisLength",
+            "origin_column": "estimatedKinematics.uncertainty.uncertaintyEllipse.semiMajorAxisLength"
+        },
+        {
+            "destination_column": "uncertainty.uncertaintyEllipse.semiMinorAxisLength",
+            "origin_column": "estimatedKinematics.uncertainty.uncertaintyEllipse.semiMinorAxisLength"
+        },
+        {
+            "destination_column": "identity.environment",
+            "origin_column": "identity.environment.environment"
+        },
+        {
+            "destination_column": "identity.standard",
+            "origin_column": "identity.standard.standardIdentity"
+        },
+        {
+            "destination_column": "identity.vesselType",
+            "origin_column": "identity.vesselType"
+        },
+        {
+            "destination_column": "identity.airPlatformType",
+            "origin_column": "identity.airPlatformType"
+        },
+        {
+            "destination_column": "identity.description",
+            "origin_column": "descriptiveLabel"
+        },
+        {
+            "destination_column": "edhControlSet",
+            "origin_column": "defaultEDH"
+        },
+        {
+            "destination_column": "mode",
+            "literal": "LIVE"
+        },
+        {
+            "destination_column": "speed",
+            "origin_column": "entityComputedSpeed"
+        },
+        {
+            "destination_column": "heading",
+            "origin_column": "entityComputedHeading"
+        }
+    ],
+    "origin_unique_ID_column": "lineage_id",
+    "perspective": "Live_POV",
+    "query": "SELECT * FROM APL_taxonomy_tracks",
+    "skip_ECEF_conversion": false,
+    "unit_conversions_script_name": "unit_conversions",
+    "custom_function_api_version": 2,
+    "number_of_transformer_processes": 2,
+    "velocity_north_column": "estimatedKinematics.velocity.northSpeed",
+    "velocity_east_column": "estimatedKinematics.velocity.eastSpeed",
+    "batch_update_chunk_size": "1000",
+    "batch_write_chunk_size": "5000",
+    "batch_write_max_concurrent": 1,
+    "component_track_event_dataset": "Live_POV_ComponentTrackEvents",
+    "component_track_head_dataset": "Live_POV_ComponentTrackHeads",
+    "entity_management_event_dataset": "Live_POV_EntityManagementEvents",
+    "head_update_interval_seconds": 30,
+    "principal_track_event_dataset": "Live_POV_PrincipalTrackEvents",
+    "principal_track_head_dataset": "Live_POV_PrincipalTrackHeads",
+    "report_event_dataset": "Live_POV_ReportEvents",
+    "skip_head_preload": true,
+    "use_numpy_fusion": true,
+    "use_numpy_kalman": true
+}

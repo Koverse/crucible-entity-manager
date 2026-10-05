@@ -1,0 +1,89 @@
+{
+    "correlation_type": "named object",
+    "custom_functions": [
+        {
+            "function_name": "velocity_components_to_speed_heading"
+        },
+        {
+            "function_name": "placeholder_function"
+        }
+    ],
+    "custom_functions_script_name": "custom_functions",
+    "destination_unique_ID_column": "identity.callsign",
+    "origin_dataset": "Red_Remote_Sensing_Tracks",
+    "origin_to_destination_mapping": [
+        {
+            "destination_column": "estimatedKinematics.kinematicsTimestamp",
+            "origin_column": "Entity.MessageData.EstimatedKinematics.KinematicsTimeStamp"
+        },
+        {
+            "destination_column": "geodetic.altitude",
+            "origin_column": "Entity.MessageData.EstimatedKinematics.Position.FixedPositionType.FixedPoint.Altitude"
+        },
+        {
+            "destination_column": "geodetic.latitude",
+            "origin_column": "Entity.MessageData.EstimatedKinematics.Position.FixedPositionType.FixedPoint.Latitude"
+        },
+        {
+            "destination_column": "geodetic.longitude",
+            "origin_column": "Entity.MessageData.EstimatedKinematics.Position.FixedPositionType.FixedPoint.Longitude"
+        },
+        {
+            "destination_column": "uncertainty.uncertaintyEllipse.orientation",
+            "origin_column": "Entity.MessageData.EstimatedKinematics.Position.FixedPositionType.Uncertainty.UncertaintyEllipse.Orientation"
+        },
+        {
+            "destination_column": "uncertainty.uncertaintyEllipse.semiMinorAxisLength",
+            "origin_column": "Entity.MessageData.EstimatedKinematics.Position.FixedPositionType.Uncertainty.UncertaintyEllipse.SemiMinorAxisLength"
+        },
+        {
+            "destination_column": "uncertainty.uncertaintyEllipse.semiMajorAxisLength",
+            "origin_column": "Entity.MessageData.EstimatedKinematics.Position.FixedPositionType.Uncertainty.UncertaintyEllipse.SemiMajorAxisLength"
+        },
+        {
+            "destination_column": "trackQuality",
+            "origin_column": "Entity.MessageData.Source.SourceSpecificData.TrackQuality"
+        },
+        {
+            "destination_column": "mode",
+            "literal": "SIMULATION"
+        },
+        {
+            "destination_column": "identity.environment",
+            "literal": "UNKNOWN"
+        },
+        {
+            "destination_column": "identity.standard",
+            "literal": "FRIEND"
+        },
+        {
+            "destination_column": "speed",
+            "origin_column": "entityComputedSpeed"
+        },
+        {
+            "destination_column": "heading",
+            "origin_column": "entityComputedHeading"
+        }
+    ],
+    "origin_unique_ID_column": "Entity.MessageData.EntityID.DescriptiveLabel",
+    "perspective": "Blue_POV",
+    "query": "SELECT * FROM Red_Remote_Sensing_Tracks",
+    "unit_conversions_script_name": "unit_conversions",
+    "custom_function_api_version": 2,
+    "number_of_transformer_processes": 1,
+    "velocity_north_column": "Entity.MessageData.EstimatedKinematics.Velocity.NorthSpeed",
+    "velocity_east_column": "Entity.MessageData.EstimatedKinematics.Velocity.EastSpeed",
+    "batch_update_chunk_size": "1000",
+    "batch_write_chunk_size": "5000",
+    "batch_write_max_concurrent": 1,
+    "component_track_event_dataset": "Blue_POV_ComponentTrackEvents",
+    "component_track_head_dataset": "Blue_POV_ComponentTrackHeads",
+    "entity_management_event_dataset": "Blue_POV_EntityManagementEvents",
+    "head_update_interval_seconds": 30,
+    "principal_track_event_dataset": "Blue_POV_PrincipalTrackEvents",
+    "principal_track_head_dataset": "Blue_POV_PrincipalTrackHeads",
+    "report_event_dataset": "Blue_POV_ReportEvents",
+    "skip_head_preload": true,
+    "use_numpy_fusion": true,
+    "use_numpy_kalman": true
+}

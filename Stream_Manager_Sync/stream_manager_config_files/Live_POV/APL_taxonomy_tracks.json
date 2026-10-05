@@ -1,0 +1,107 @@
+{
+    "correlation_type": "dynamic",
+    "crucible_tracker": "kalman",
+    "custom_functions": [
+        {
+            "function_name": "set_edh"
+        }
+    ],
+    "destination_unique_ID_column": "identity.dynamicIdentifier",
+    "disabled": true,
+    "num_tracker_workers": 2,
+    "num_transformer_workers": 2,
+    "origin_dataset": "APL_taxonomy_tracks",
+    "origin_to_destination_mapping": [
+        {
+            "destination_column": "estimatedKinematics.position.latitude",
+            "origin_column": "estimatedKinematics.position.latitude"
+        },
+        {
+            "destination_column": "estimatedKinematics.position.longitude",
+            "origin_column": "estimatedKinematics.position.longitude"
+        },
+        {
+            "destination_column": "estimatedKinematics.position.altitude",
+            "origin_column": "estimatedKinematics.position.altitude"
+        },
+        {
+            "destination_column": "estimatedKinematics.kinematicsTimestamp",
+            "origin_column": "replayTimestamp"
+        },
+        {
+            "destination_column": "estimatedKinematics.velocity.northSpeed",
+            "origin_column": "estimatedKinematics.velocity.northSpeed"
+        },
+        {
+            "destination_column": "estimatedKinematics.velocity.eastSpeed",
+            "origin_column": "estimatedKinematics.velocity.eastSpeed"
+        },
+        {
+            "destination_column": "estimatedKinematics.velocity.downSpeed",
+            "origin_column": "estimatedKinematics.velocity.downSpeed"
+        },
+        {
+            "destination_column": "estimatedKinematics.uncertainty.uncertaintyEllipse.orientation",
+            "origin_column": "estimatedKinematics.uncertainty.uncertaintyEllipse.orientation"
+        },
+        {
+            "destination_column": "estimatedKinematics.uncertainty.uncertaintyEllipse.semiMajorAxisLength",
+            "origin_column": "estimatedKinematics.uncertainty.uncertaintyEllipse.semiMajorAxisLength"
+        },
+        {
+            "destination_column": "estimatedKinematics.uncertainty.uncertaintyEllipse.semiMinorAxisLength",
+            "origin_column": "estimatedKinematics.uncertainty.uncertaintyEllipse.semiMinorAxisLength"
+        },
+        {
+            "destination_column": "identity.environment.environment",
+            "origin_column": "identity.environment.environment"
+        },
+        {
+            "destination_column": "identity.standard.standardIdentity",
+            "origin_column": "identity.standard.standardIdentity"
+        },
+        {
+            "destination_column": "identity.vesselType",
+            "origin_column": "identity.vesselType"
+        },
+        {
+            "destination_column": "identity.airPlatformType",
+            "origin_column": "identity.airPlatformType"
+        },
+        {
+            "destination_column": "identity.description",
+            "origin_column": "descriptiveLabel"
+        },
+        {
+            "destination_column": "entityStatus",
+            "origin_column": "entityStatus"
+        },
+        {
+            "destination_column": "edhControlSet",
+            "origin_column": "defaultEDH"
+        },
+        {
+            "destination_column": "mode",
+            "literal": "LIVE"
+        },
+        {
+            "destination_column": "atomsId",
+            "origin_column": "atomsId"
+        },
+        {
+            "destination_column": "enterpriseObjectId",
+            "origin_column": "enterpriseObjectId"
+        },
+        {
+            "destination_column": "atomsName",
+            "origin_column": "atomsName"
+        }
+    ],
+    "origin_unique_ID_column": "lineage_id",
+    "perspective": "Live_POV",
+    "query": "SELECT * FROM APL_taxonomy_tracks",
+    "skip_ECEF_conversion": false,
+    "skip_object_manager": false,
+    "track_event_dataset": "Live_POV_PrincipalTrackEvents",
+    "unit_conversions_script_name": "unit_conversions"
+}

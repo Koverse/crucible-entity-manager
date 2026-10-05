@@ -1,0 +1,91 @@
+{
+    "correlation_type": "dynamic",
+    "crucible_tracker": "kalman",
+    "custom_functions": [
+        {
+            "function_name": "set_edh"
+        }
+    ],
+    "destination_unique_ID_column": "identity.navalPennant,identity.vesselTypeCode",
+    "disabled": false,
+    "num_tracker_workers": 3,
+    "num_transformer_workers": 3,
+    "origin_dataset": "Maritime_U",
+    "origin_to_destination_mapping": [
+        {
+            "destination_column": "estimatedKinematics.position.latitude",
+            "origin_column": "latitude"
+        },
+        {
+            "destination_column": "estimatedKinematics.position.longitude",
+            "origin_column": "longitude"
+        },
+        {
+            "destination_column": "estimatedKinematics.kinematicsTimestamp",
+            "origin_column": "eventTime"
+        },
+        {
+            "destination_column": "edhControlSet",
+            "origin_column": "defaultEDH"
+        },
+        {
+            "destination_column": "mode",
+            "literal": "LIVE"
+        },
+        {
+            "destination_column": "identity.environment.environment",
+            "literal": "SEA_SURFACE"
+        },
+        {
+            "destination_column": "identity.standard.standardIdentity",
+            "literal": "UNKNOWN"
+        },
+        {
+            "destination_column": "entityStatus",
+            "literal": "POTENTIAL"
+        },
+        {
+            "destination_column": "upstreamSource",
+            "literal": "Maritime_generator"
+        },
+        {
+            "destination_column": "collectionType",
+            "literal": "MARITIME"
+        },
+        {
+            "destination_column": "enterpriseObjectId",
+            "origin_column": "enterpriseObjectId"
+        },
+        {
+            "destination_column": "atomsId",
+            "origin_column": "atomsId"
+        },
+        {
+            "destination_column": "atomsName",
+            "origin_column": "atomsName"
+        },
+        {
+            "destination_column": "identity.mmsiNumber",
+            "origin_column": "mmsiNumber"
+        },
+        {
+            "destination_column": "identity.vesselName",
+            "origin_column": "vesselName"
+        }
+    ],
+    "origin_unique_ID_column": "navalPennant,vesselTypeCode",
+    "perspective": "Live_POV",
+    "query": "SELECT * FROM Maritime_U WHERE latitude IS NOT NULL AND longitude IS NOT NULL AND vesselId IS NOT NULL",
+    "skip_ECEF_conversion": false,
+    "skip_object_manager": false,
+    "unit_conversions": [
+        {
+            "origin_column": "latitude",
+            "unit_conversion": "degrees_to_radians"
+        },
+        {
+            "origin_column": "longitude",
+            "unit_conversion": "degrees_to_radians"
+        }
+    ]
+}

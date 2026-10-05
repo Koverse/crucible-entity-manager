@@ -1,0 +1,100 @@
+{
+    "correlation_type": "dynamic",
+    "crucible_tracker": "kalman",
+    "custom_functions": [
+        {
+            "function_name": "get_velocity"
+        },
+        {
+            "function_name": "get_observation_time"
+        },
+        {
+            "function_name": "set_edh"
+        }
+    ],
+    "destination_unique_ID_column": "identity.dynamicIdentifier",
+    "disabled": false,
+    "num_tracker_workers": 2,
+    "num_transformer_workers": 2,
+    "origin_dataset": "Observations",
+    "origin_to_destination_mapping": [
+        {
+            "destination_column": "estimatedKinematics.kinematicsTimestamp",
+            "origin_column": "observation_time_iso"
+        },
+        {
+            "destination_column": "estimatedKinematics.position.altitude",
+            "origin_column": "alt_geom"
+        },
+        {
+            "destination_column": "estimatedKinematics.position.latitude",
+            "origin_column": "lat"
+        },
+        {
+            "destination_column": "estimatedKinematics.position.longitude",
+            "origin_column": "lon"
+        },
+        {
+            "destination_column": "edhControlSet",
+            "origin_column": "defaultEDH"
+        },
+        {
+            "destination_column": "mode",
+            "literal": "LIVE"
+        },
+        {
+            "destination_column": "identity.environment.environment",
+            "literal": "AIR"
+        },
+        {
+            "destination_column": "identity.standard.standardIdentity",
+            "literal": "ASSUMED_FRIEND"
+        },
+        {
+            "destination_column": "estimatedKinematics.velocity.northSpeed",
+            "origin_column": "northSpeed"
+        },
+        {
+            "destination_column": "estimatedKinematics.velocity.eastSpeed",
+            "origin_column": "eastSpeed"
+        },
+        {
+            "destination_column": "estimatedKinematics.uncertainty.uncertaintyEllipse.orientation",
+            "literal": "0.0",
+            "type": "float"
+        },
+        {
+            "destination_column": "estimatedKinematics.uncertainty.uncertaintyEllipse.semiMajorAxisLength",
+            "literal": "75.0",
+            "type": "float"
+        },
+        {
+            "destination_column": "estimatedKinematics.uncertainty.uncertaintyEllipse.semiMinorAxisLength",
+            "literal": "50.0",
+            "type": "float"
+        },
+        {
+            "destination_column": "entityStatus",
+            "literal": "POTENTIAL"
+        }
+    ],
+    "origin_unique_ID_column": "hex",
+    "perspective": "Live_POV",
+    "query": "SELECT * FROM Observations where lat is not null and lon is not null",
+    "skip_ECEF_conversion": false,
+    "skip_object_manager": false,
+    "unit_conversions": [
+        {
+            "origin_column": "lat",
+            "unit_conversion": "degrees_to_radians"
+        },
+        {
+            "origin_column": "lon",
+            "unit_conversion": "degrees_to_radians"
+        },
+        {
+            "origin_column": "alt_geom",
+            "unit_conversion": "convert_to_float"
+        }
+    ]
+}

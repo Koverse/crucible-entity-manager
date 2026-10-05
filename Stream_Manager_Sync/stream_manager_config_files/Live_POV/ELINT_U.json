@@ -1,0 +1,131 @@
+{
+    "correlation_type": "dynamic",
+    "crucible_tracker": "kalman",
+    "custom_functions": [
+        {
+            "function_name": "set_edh"
+        }
+    ],
+    "destination_unique_ID_column": "identity.dynamicIdentifier",
+    "disabled": false,
+    "num_tracker_workers": 2,
+    "num_transformer_workers": 2,
+    "origin_dataset": "ELINT_U",
+    "origin_to_destination_mapping": [
+        {
+            "destination_column": "estimatedKinematics.position.latitude",
+            "origin_column": "latitude"
+        },
+        {
+            "destination_column": "estimatedKinematics.position.longitude",
+            "origin_column": "longitude"
+        },
+        {
+            "destination_column": "estimatedKinematics.kinematicsTimestamp",
+            "origin_column": "eventTime"
+        },
+        {
+            "destination_column": "estimatedKinematics.uncertainty.uncertaintyEllipse.orientation",
+            "origin_column": "orientationDegrees"
+        },
+        {
+            "destination_column": "estimatedKinematics.uncertainty.uncertaintyEllipse.semiMajorAxisLength",
+            "origin_column": "semiMajorAxisMeters"
+        },
+        {
+            "destination_column": "estimatedKinematics.uncertainty.uncertaintyEllipse.semiMinorAxisLength",
+            "origin_column": "semiMinorAxisMeters"
+        },
+        {
+            "destination_column": "edhControlSet",
+            "origin_column": "defaultEDH"
+        },
+        {
+            "destination_column": "mode",
+            "literal": "LIVE"
+        },
+        {
+            "destination_column": "identity.environment.environment",
+            "literal": "SEA_SURFACE"
+        },
+        {
+            "destination_column": "identity.standard.standardIdentity",
+            "literal": "UNKNOWN"
+        },
+        {
+            "destination_column": "entityStatus",
+            "literal": "POTENTIAL"
+        },
+        {
+            "destination_column": "upstreamSource",
+            "literal": "ELINT_generator"
+        },
+        {
+            "destination_column": "collectionType",
+            "literal": "ELINT"
+        },
+        {
+            "destination_column": "enterpriseObjectId",
+            "origin_column": "enterpriseObjectId"
+        },
+        {
+            "destination_column": "atomsId",
+            "origin_column": "atomsId"
+        },
+        {
+            "destination_column": "atomsName",
+            "origin_column": "atomsName"
+        },
+        {
+            "destination_column": "unit",
+            "origin_column": "unit"
+        },
+        {
+            "destination_column": "unitEchelon",
+            "origin_column": "unitEchelon"
+        },
+        {
+            "destination_column": "kinematicallyInferredOrigin",
+            "origin_column": "kinematicallyInferredOrigin"
+        },
+        {
+            "destination_column": "kinematicallyInferredDestination",
+            "origin_column": "kinematicallyInferredDestination"
+        },
+        {
+            "destination_column": "kinematicallyInferredPlatformType",
+            "origin_column": "kinematicallyInferredPlatformType"
+        },
+        {
+            "destination_column": "identity.siteType",
+            "origin_column": "siteType"
+        },
+        {
+            "destination_column": "identity.description",
+            "origin_column": "emitterType"
+        },
+        {
+            "destination_column": "identity.vesselType",
+            "origin_column": "platformType"
+        }
+    ],
+    "origin_unique_ID_column": "emitterId",
+    "perspective": "Live_POV",
+    "query": "SELECT * FROM ELINT_U WHERE latitude IS NOT NULL AND longitude IS NOT NULL AND emitterId IS NOT NULL",
+    "skip_ECEF_conversion": false,
+    "skip_object_manager": false,
+    "unit_conversions": [
+        {
+            "origin_column": "latitude",
+            "unit_conversion": "degrees_to_radians"
+        },
+        {
+            "origin_column": "longitude",
+            "unit_conversion": "degrees_to_radians"
+        },
+        {
+            "origin_column": "orientationDegrees",
+            "unit_conversion": "degrees_to_radians"
+        }
+    ]
+}
