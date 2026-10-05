@@ -11,7 +11,7 @@
     ],
     "destination_unique_ID_column": "identity.dynamicIdentifier",
     "disabled": false,
-    "disable_all_other_datasets": true,
+    "disable_all_other_datasets": false,
     "num_tracker_workers": 3,
     "num_transformer_workers": 3,
     "origin_dataset": "DenverRTD",
