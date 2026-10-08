@@ -1,0 +1,87 @@
+{
+    "correlation_type": "Dynamic object creation",
+    "crucible_tracker": "passthrough",
+    "custom_functions": [
+        {
+            "function_name": "set_edh"
+        },
+        {
+            "function_name": "set_measurement_errors"
+        }
+    ],
+    "destination_unique_ID_column": "identity.dynamicIdentifier",
+    "disabled": false,
+    "disable_all_other_datasets": false,
+    "num_tracker_workers": 3,
+    "num_transformer_workers": 3,
+    "origin_dataset": "DenverRTD",
+    "origin_to_destination_mapping": [
+        {
+            "destination_column": "estimatedKinematics.position.latitude",
+            "origin_column": "vehicle.position.latitude"
+        },
+        {
+            "destination_column": "estimatedKinematics.position.longitude",
+            "origin_column": "vehicle.position.longitude"
+        },
+        {
+            "destination_column": "estimatedKinematics.kinematicsTimestamp",
+            "origin_column": "vehicle.timestamp"
+        },
+        {
+            "destination_column": "estimatedKinematics.uncertainty.uncertaintyEllipse.orientation",
+            "origin_column": "position_orientation"
+        },
+        {
+            "destination_column": "estimatedKinematics.uncertainty.uncertaintyEllipse.semiMajorAxisLength",
+            "origin_column": "position_semimajor"
+        },
+        {
+            "destination_column": "estimatedKinematics.uncertainty.uncertaintyEllipse.semiMinorAxisLength",
+            "origin_column": "position_semiminor"
+        },
+        {
+            "destination_column": "mode",
+            "literal": "LIVE"
+        },
+        {
+            "destination_column": "identity.environment.environment",
+            "literal": "GROUND"
+        },
+        {
+            "destination_column": "identity.standard.standardIdentity",
+            "literal": "ASSUMED_FRIEND"
+        },
+        {
+            "destination_column": "identity.standard.allegiance",
+            "literal": "USA"
+        },
+        {
+            "destination_column": "edhControlSet",
+            "origin_column": "defaultEDH"
+        },
+        {
+            "destination_column": "entityStatus",
+            "literal": "POTENTIAL"
+        }
+    ],
+    "origin_unique_ID_column": "vehicle.vehicle.id",
+    "perspective": "Live_POV",
+    "query": "SELECT * FROM DenverRTD WHERE DenverRTD.vehicle.vehicle.id IS NOT NULL AND CAST(DenverRTD.vehicle.vehicle.id AS VARCHAR) <> ''",
+    "skip_ECEF_conversion": false,
+    "skip_object_manager": false,
+    "unit_conversions": [
+        {
+            "origin_column": "vehicle.position.latitude",
+            "unit_conversion": "degrees_to_radians"
+        },
+        {
+            "origin_column": "vehicle.position.longitude",
+            "unit_conversion": "degrees_to_radians"
+        },
+        {
+            "origin_column": "vehicle.timestamp",
+            "unit_conversion": "sec_to_ISO8601"
+        }
+    ]
+}

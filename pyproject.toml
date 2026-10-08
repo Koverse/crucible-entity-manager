@@ -6,7 +6,21 @@ build-backend = "setuptools.build_meta"
 name = "crucible-entity-manager"
 version = "0.1.0"
 requires-python = ">=3.12"
-dependencies = []
+dependencies = [
+	"numpy",
+	"pandas",
+	"aiohttp",
+	"aiohttp-sse-client",
+	"scipy",
+	"pyproj",
+	"polars",
+	"pyarrow",
+	"stonesoup",
+	"filterpy",
+	"cruciblelib",
+	"utm",
+	"httpx[http2]",
+]
 
 [project.optional-dependencies]
 dev = ["pytest"]

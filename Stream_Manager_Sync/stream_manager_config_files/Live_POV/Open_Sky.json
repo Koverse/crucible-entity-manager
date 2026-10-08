@@ -1,0 +1,112 @@
+{
+    "correlation_type": "dynamic",
+    "crucible_tracker": "passthrough",
+    "custom_functions": [
+        {
+            "function_name": "get_velocity_open_sky"
+        },
+        {
+            "function_name": "set_edh"
+        }
+    ],
+    "destination_unique_ID_column": "identity.dynamicIdentifier",
+    "disabled": true,
+    "num_tracker_workers": 3,
+    "number_of_transformer_processes": 3,
+    "origin_dataset": "Open_Sky",
+    "origin_to_destination_mapping": [
+        {
+            "destination_column": "identity.callsign",
+            "origin_column": "callsign"
+        },
+        {
+            "destination_column": "estimatedKinematics.kinematicsTimestamp",
+            "origin_column": "time_position"
+        },
+        {
+            "destination_column": "estimatedKinematics.position.altitude",
+            "origin_column": "geo_altitude"
+        },
+        {
+            "destination_column": "estimatedKinematics.position.latitude",
+            "origin_column": "latitude"
+        },
+        {
+            "destination_column": "estimatedKinematics.position.longitude",
+            "origin_column": "longitude"
+        },
+        {
+            "destination_column": "edhControlSet",
+            "origin_column": "defaultEDH"
+        },
+        {
+            "destination_column": "mode",
+            "literal": "LIVE"
+        },
+        {
+            "destination_column": "identity.environment.environment",
+            "literal": "AIR"
+        },
+        {
+            "destination_column": "identity.standard.standardIdentity",
+            "literal": "ASSUMED_FRIEND"
+        },
+        {
+            "destination_column": "estimatedKinematics.velocity.northSpeed",
+            "origin_column": "northSpeed"
+        },
+        {
+            "destination_column": "estimatedKinematics.velocity.eastSpeed",
+            "origin_column": "eastSpeed"
+        },
+        {
+            "destination_column": "estimatedKinematics.uncertainty.uncertaintyEllipse.orientation",
+            "literal": "0.0",
+            "type": "float"
+        },
+        {
+            "destination_column": "estimatedKinematics.uncertainty.uncertaintyEllipse.semiMajorAxisLength",
+            "literal": "75.0",
+            "type": "float"
+        },
+        {
+            "destination_column": "estimatedKinematics.uncertainty.uncertaintyEllipse.semiMinorAxisLength",
+            "literal": "50.0",
+            "type": "float"
+        },
+        {
+            "destination_column": "entityStatus",
+            "literal": "POTENTIAL"
+        }
+    ],
+    "origin_unique_ID_column": "icao24",
+    "perspective": "Live_POV",
+    "query": "SELECT * FROM Open_Sky where latitude is not null and longitude is not null",
+    "skip_ECEF_conversion": false,
+    "unit_conversions": [
+        {
+            "origin_column": "latitude",
+            "unit_conversion": "degrees_to_radians"
+        },
+        {
+            "origin_column": "longitude",
+            "unit_conversion": "degrees_to_radians"
+        },
+        {
+            "origin_column": "geo_altitude",
+            "unit_conversion": "convert_to_float"
+        },
+        {
+            "origin_column": "velocity",
+            "unit_conversion": "convert_to_float"
+        },
+        {
+            "origin_column": "true_track",
+            "unit_conversion": "convert_to_float"
+        },
+        {
+            "origin_column": "time_position",
+            "unit_conversion": "sec_to_ISO8601"
+        }
+    ]
+}
